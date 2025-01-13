@@ -4,12 +4,14 @@
  import ListaPost from './components/pages/ListaPost';
  import DetailPost from './components/pages/DetailPost';
  import AppLayout from "./components/AppLayout"
+ import GlobalContext from './components/Context/GlobalContext';
  
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App() {
   return (
+    <GlobalContext.Provider value= {globalProviderValue}>
     <BrowserRouter>
     <Routes>
         <Route element={<AppLayout/>}>
@@ -20,5 +22,6 @@ export default function App() {
         </Route>
     </Routes>
     </BrowserRouter>
+    </GlobalContext.Provider>
   )  
 }
