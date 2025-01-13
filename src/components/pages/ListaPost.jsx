@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import AppCard from "../AppCard";
 import axios from 'axios';
+import GlobalContext from '../Context/GlobalContext';
+import { useContext } from 'react';
 
 export default function ListaPost() {
+    const {articles} = useContext(GlobalContext)
     const apiUrl = "http://localhost:3000";
-    const [articles, setArticles] = useState([]);
+    // const [articles, setArticles] = useState([]);
 
     const handleDelete = (postId) => {
         axios.delete(`${apiUrl}/posts/${postId}`)
@@ -19,22 +22,7 @@ export default function ListaPost() {
 
     
 
-    const getPost = () => {
-        axios.get(`${apiUrl}/posts`)
-            .then((Response) => {
-                const fetchedData = Response.data?.data || [];
-                setArticles(fetchedData);
-                console.log(Response.data);
-                
-            })
-            .catch((error) => {
-                console.error("Errore durante il recupero dei post:", error);
-            });
-    };
-
-    useEffect(() => {
-        getPost();
-    }, []);
+   
 
     return (
         <div className="mt-4">
